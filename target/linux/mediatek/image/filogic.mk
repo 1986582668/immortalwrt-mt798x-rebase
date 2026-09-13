@@ -4101,3 +4101,21 @@ ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 endif
 endef
 TARGET_DEVICES += zyxel_wx5600-t0-ubootmod
+define Device/ikuai_q3000
+  DEVICE_VENDOR := iKuai
+  DEVICE_MODEL := Q3000
+  DEVICE_DTS := mt7981b-ikuai-q3000
+  DEVICE_DTS_DIR := ../dts
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 113152k
+  KERNEL_IN_UBI := 1
+  IMAGES := sysupgrade.bin factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  KERNEL := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb
+  KERNEL_INITRAMFS := kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
+  IMAGE/sysupgrade.bin := append-kernel | sysupgrade-tar | append-metadata
+  DEVICE_PACKAGES := kmod-mt_wifi wifi-profile wifi-dats kmod-conninfra kmod-warp kmod-mediatek_hnat luci-app-turboacc-mtk
+endef
+TARGET_DEVICES += ikuai_q3000
