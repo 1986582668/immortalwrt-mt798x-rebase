@@ -32,6 +32,12 @@ set_macs_to_dat()
 mtwifi_set_macs()
 {
     case $(board_name) in
+    ikuai,q3000)
+        local b0_mac="08:9B:4B:18:4D:54"
+        local b1_mac="08:9B:4B:18:4D:54"
+
+        set_macs_to_dat "$b0_mac" "$b1_mac"
+        ;;
 	acer,predator-w6x-stock|\
 	acer,predator-w6x-ubootmod)
 		local base_mac="$(mtd_get_mac_ascii u-boot-env ethaddr)"

@@ -77,8 +77,7 @@
 		reg = <0>;
 		phy-mode = "2500base-x";
 
-		nvmem-cells = <&macaddr_factory_10048 1>;
-		nvmem-cell-names = "mac-address";
+		local-mac-address = [08 9b 4b 18 4d 55];
 
 		fixed-link {
 			speed = <2500>;
@@ -190,8 +189,7 @@
 		port@3 {
 			reg = <3>;
 			label = "wan";
-			nvmem-cells = <&macaddr_factory_10048 0>;
-			nvmem-cell-names = "mac-address";
+			local-mac-address = [08 9b 4b 18 4d 54];
 		};
 
 		port@6 {

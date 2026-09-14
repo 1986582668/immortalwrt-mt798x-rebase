@@ -1,0 +1,12 @@
+
+--- a/mt_wifi/os/linux/rt_profile.c
++++ b/mt_wifi/os/linux/rt_profile.c
+@@ -1610,7 +1610,7 @@ VOID announce_802_11_radiotap_packet(POS_COOKIE pOsCookie, POS_PKT pOSPkt)
+ 	if (pOSPkt->dev == NULL)
+ 		RELEASE_NDIS_PACKET(pAd, pPacket, NDIS_STATUS_FAILURE);
+ 	else
+-		netif_rx_ni(pOSPkt);
++		netif_rx(pOSPkt);
+
+ }
+ #endif
